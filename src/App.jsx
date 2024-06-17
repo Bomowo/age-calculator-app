@@ -1,7 +1,8 @@
 import { useState } from "react"
 
 function App() {
-  let [[day, month, year], setDate] = useState([1,1,1])
+  let [[bDay, bMonth, bYear], setDate] = useState([1,1,1])
+  let [[diffDay, diffMonth, diffYear], setDiffDate] = useState([null, null, null])
 
   function changeDay (e) {
     if((e.target.value <= 31 && e.target.value>=1)  || e.target.value === '') {
@@ -30,28 +31,46 @@ function App() {
   function calculateAgeDiff () {
     let currentDate = new Date()
     let inputDate = new Date()
-    inputDate.setFullYear(year)
-    inputDate.setMonth(month)
-    inputDate.setDate(day)
-    console.log(currentDate, inputDate)
+
+    inputDate.setFullYear(bYear)
+    inputDate.setMonth(bMonth)
+    inputDate.setDate(bDay)
+
+    let dateDiff = currentDate - inputDate
+
+    let dateDiffYear = Math.floor(dateDiff / 31556952000)
+    dateDiff = dateDiff - (dateDiffYear * 31556952000)
+    console.log(dateDiffYear)
+    let dateDiffMonth = Math.floor(dateDiff / 2629746000)
+    dateDiff = dateDiff - (dateDiffMonth * 2629746000)
+    console.log(dateDiffMonth)
+    let dateDiffDay = Math.floor(dateDiff / 86400000)
+    console.log(dateDiffYear, dateDiffMonth, dateDiffDay)
+
+
+
+    const diffTime = Math.abs(currentDate - inputDate);
+    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24)); 
+    console.log(diffTime + " milliseconds");
+    console.log(diffDays + " days");
   }
 
   return (
     <>
       Day
-      <input type={'number'} min={1} max={31} value={day} onInput={changeDay}></input>
+      <input type={'number'} min={1} max={31} value={bDay} onInput={changeDay}></input>
 
       Month
-      <input type={'number'} min={1} max={12} value={month} onInput={changeMonth}></input>
+      <input type={'number'} min={1} max={12} value={bMonth} onInput={changeMonth}></input>
 
       Year
-      <input type={'number'} min={1} max={2024} value={year} onInput={changeYear}></input>
+      <input type={'number'} min={1} max={2024} value={bYear} onInput={changeYear}></input>
 
 
       <button onClick={calculateAgeDiff}>Submit</button>
-      -- years
-      -- months
-      -- days
+      {diffYear && diffYear} years
+      {diffMonth && diffMonth} months
+      {diffDay && diffDay} days
 
       <div className="attribution">
         Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
