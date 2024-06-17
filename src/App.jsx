@@ -4,7 +4,6 @@ function App() {
   let [[day, month, year], setDate] = useState([1,1,1])
 
   function changeDay (e) {
-    console.log(e.target.value)
     if((e.target.value <= 31 && e.target.value>=1)  || e.target.value === '') {
       setDate((prevDate) => {
         return [e.target.value, prevDate[1], prevDate[2]]
@@ -28,6 +27,14 @@ function App() {
     }
   }
 
+  function calculateAgeDiff () {
+    let currentDate = new Date()
+    let inputDate = new Date()
+    inputDate.setFullYear(year)
+    inputDate.setMonth(month)
+    inputDate.setDate(day)
+    console.log(currentDate, inputDate)
+  }
 
   return (
     <>
@@ -40,11 +47,13 @@ function App() {
       Year
       <input type={'number'} min={1} max={2024} value={year} onInput={changeYear}></input>
 
+
+      <button onClick={calculateAgeDiff}>Submit</button>
       -- years
       -- months
       -- days
 
-      <div class="attribution">
+      <div className="attribution">
         Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
         Coded by <a href="https://github.com/Bomowo">Bomowo</a>.
       </div>
