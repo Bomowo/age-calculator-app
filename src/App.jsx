@@ -35,24 +35,22 @@ function App() {
     inputDate.setFullYear(bYear)
     inputDate.setMonth(bMonth)
     inputDate.setDate(bDay)
-
-    let dateDiff = currentDate - inputDate
+    
+    let dateDiff = Math.abs(currentDate - inputDate)
 
     let dateDiffYear = Math.floor(dateDiff / 31556952000)
     dateDiff = dateDiff - (dateDiffYear * 31556952000)
-    console.log(dateDiffYear)
     let dateDiffMonth = Math.floor(dateDiff / 2629746000)
     dateDiff = dateDiff - (dateDiffMonth * 2629746000)
-    console.log(dateDiffMonth)
     let dateDiffDay = Math.floor(dateDiff / 86400000)
-    console.log(dateDiffYear, dateDiffMonth, dateDiffDay)
+
+    setDiffDate([dateDiffDay, dateDiffMonth, dateDiffYear])
 
 
-
-    const diffTime = Math.abs(currentDate - inputDate);
-    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24)); 
-    console.log(diffTime + " milliseconds");
-    console.log(diffDays + " days");
+    // const diffTime = Math.abs(currentDate - inputDate);
+    // const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24)); 
+    // console.log(diffTime + " milliseconds");
+    // console.log(diffDays + " days");
   }
 
   return (
