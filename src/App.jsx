@@ -6,27 +6,34 @@ function App() {
   let [[errorDay, errorMonth, errorYear, errorReq], setError] = useState([null, null, null, null])
 
   function changeDay (e) {
-      if(e.target.value === 29 && bMonth === 2 && bYear % 4 !== 0 && bYear % 400 !== 0) {
+    console.log(typeof bMonth)
+      if(+e.target.value > 28 && bMonth === '2' && bYear % 4 !== 0 && bYear % 400 !== 0) {
         setError((prevErrors) => {
           return [`${bYear} in not a leap year`, prevErrors[1], prevErrors[2], prevErrors[3]]
         })
       }
-      else if (e.target.value > 30 && bMonth === 4) {
+      else if (+e.target.value > 29 && bMonth === '2') {
         setError((prevErrors) => {
           return ['Must be a valid day', prevErrors[1], prevErrors[2], prevErrors[3]]
         })
       }
-      else if (e.target.value > 30 && bMonth === 6) {
+      else if (+e.target.value > 30 && bMonth === '4') {
         setError((prevErrors) => {
           return ['Must be a valid day', prevErrors[1], prevErrors[2], prevErrors[3]]
         })
       }
-      else if (e.target.value > 30 && bMonth === 9) {
+      else if (+e.target.value > 30 && bMonth === '6') {
+        console.log('Hi ?')
         setError((prevErrors) => {
           return ['Must be a valid day', prevErrors[1], prevErrors[2], prevErrors[3]]
         })
       }
-      else if (e.target.value > 30 && bMonth === 11) {
+      else if (+e.target.value > 30 && bMonth === '9') {
+        setError((prevErrors) => {
+          return ['Must be a valid day', prevErrors[1], prevErrors[2], prevErrors[3]]
+        })
+      }
+      else if (+e.target.value > 30 && bMonth === '11') {
         setError((prevErrors) => {
           return ['Must be a valid day', prevErrors[1], prevErrors[2], prevErrors[3]]
         })
@@ -36,20 +43,19 @@ function App() {
           return ['Must be a valid day', prevErrors[1], prevErrors[2], prevErrors[3]]
         })
       } else {
-        console.log(e)
+        console.log('Hello ???')
         setError((prevErrors) => {
           return [null, prevErrors[1], prevErrors[2], prevErrors[3]]
         })
       }
     
       setDate((prevDate) => {
-        console.log('ok!')
         return [e.target.value, prevDate[1], prevDate[2]]
       })
   }
 
   function changeMonth (e) {
-    
+
       setDate((prevDate) => {
         return [prevDate[0], e.target.value, prevDate[2]]
       })  
@@ -101,9 +107,11 @@ function App() {
 
       Month
       <input type={'number'} value={bMonth} onInput={changeMonth} name={'month'}></input>
+      {errorMonth && <p>{errorMonth}</p>}
 
       Year
       <input type={'number'} value={bYear} onInput={changeYear} name={'year'}></input>
+      {errorYear && <p>{errorYear}</p>}
 
 
       <button onClick={calculateAgeDiff}>Submit</button>
