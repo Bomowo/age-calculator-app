@@ -23,7 +23,6 @@ function App() {
         })
       }
       else if (+e.target.value > 30 && bMonth === '6') {
-        console.log('Hi ?')
         setError((prevErrors) => {
           return ['Must be a valid day', prevErrors[1], prevErrors[2], prevErrors[3]]
         })
@@ -43,7 +42,6 @@ function App() {
           return ['Must be a valid day', prevErrors[1], prevErrors[2], prevErrors[3]]
         })
       } else {
-        console.log('Hello ???')
         setError((prevErrors) => {
           return [null, prevErrors[1], prevErrors[2], prevErrors[3]]
         })
@@ -55,6 +53,15 @@ function App() {
   }
 
   function changeMonth (e) {
+      if(e.target.value < 1 || e.target.value > 12) {
+        setError((prevErrors) => {
+          return [prevErrors[0], 'Must be a valid month', prevErrors[2], prevErrors[3]]
+        })
+      } else {
+        setError((prevErrors) => {
+          return [prevErrors[0], null, prevErrors[2], prevErrors[3]]
+        })
+      }
 
       setDate((prevDate) => {
         return [prevDate[0], e.target.value, prevDate[2]]
@@ -62,14 +69,29 @@ function App() {
   }
 
   function changeYear (e) {
+      let todayYear = new Date().getFullYear()
+      if(e.target.value < 1) {
+        setError((prevErrors) => {
+          return [prevErrors[0], prevErrors[1], 'Must be a valid year',  prevErrors[3]]
+        })
+      } 
+      else if(e.target.value > todayYear) {
+        setError((prevErrors) => {
+          return [prevErrors[0], prevErrors[1], 'Must be in the past',  prevErrors[3]]
+        })
+      }
+      else {
+        setError((prevErrors) => {
+          return [prevErrors[0], prevErrors[1], null,  prevErrors[3]]
+        })
+      }
+
       setDate((prevDate) => {
         return [prevDate[0], prevDate[1], e.target.value]
       })
   }
 
   function calculateAgeDiff () {
-
-
 
     if(!errorDay && !errorMonth && !errorYear && !errorReq) {
       console.log(!errorDay && !errorMonth && !errorYear && !errorReq, [errorDay, errorMonth, errorYear, errorReq])
