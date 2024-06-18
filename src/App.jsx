@@ -6,12 +6,37 @@ function App() {
   let [[errorDay, errorMonth, errorYear, errorReq], setError] = useState([null, null, null, null])
 
   function changeDay (e) {
-      if(e.target.value < 1 || e.target.value > 31) {
-        console.log(e.target.value)
+      if(e.target.value === 29 && bMonth === 2 && bYear % 4 !== 0 && bYear % 400 !== 0) {
+        setError((prevErrors) => {
+          return [`${bYear} in not a leap year`, prevErrors[1], prevErrors[2], prevErrors[3]]
+        })
+      }
+      else if (e.target.value > 30 && bMonth === 4) {
+        setError((prevErrors) => {
+          return ['Must be a valid day', prevErrors[1], prevErrors[2], prevErrors[3]]
+        })
+      }
+      else if (e.target.value > 30 && bMonth === 6) {
+        setError((prevErrors) => {
+          return ['Must be a valid day', prevErrors[1], prevErrors[2], prevErrors[3]]
+        })
+      }
+      else if (e.target.value > 30 && bMonth === 9) {
+        setError((prevErrors) => {
+          return ['Must be a valid day', prevErrors[1], prevErrors[2], prevErrors[3]]
+        })
+      }
+      else if (e.target.value > 30 && bMonth === 11) {
+        setError((prevErrors) => {
+          return ['Must be a valid day', prevErrors[1], prevErrors[2], prevErrors[3]]
+        })
+      }
+      else if(e.target.value < 1 || e.target.value > 31) {
         setError((prevErrors) => {
           return ['Must be a valid day', prevErrors[1], prevErrors[2], prevErrors[3]]
         })
       } else {
+        console.log(e)
         setError((prevErrors) => {
           return [null, prevErrors[1], prevErrors[2], prevErrors[3]]
         })
@@ -24,6 +49,7 @@ function App() {
   }
 
   function changeMonth (e) {
+    
       setDate((prevDate) => {
         return [prevDate[0], e.target.value, prevDate[2]]
       })  
@@ -70,14 +96,14 @@ function App() {
   return (
     <>
       Day
-      <input type={'number'} value={bDay} onInput={changeDay}></input>
+      <input type={'number'} value={bDay} onInput={changeDay} name={'day'}></input>
       {errorDay && <p>{errorDay}</p>}
 
       Month
-      <input type={'number'} value={bMonth} onInput={changeMonth}></input>
+      <input type={'number'} value={bMonth} onInput={changeMonth} name={'month'}></input>
 
       Year
-      <input type={'number'} value={bYear} onInput={changeYear}></input>
+      <input type={'number'} value={bYear} onInput={changeYear} name={'year'}></input>
 
 
       <button onClick={calculateAgeDiff}>Submit</button>
