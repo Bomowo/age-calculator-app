@@ -123,28 +123,35 @@ function App() {
 
   return (
     <>
-      Day
-      <input type={'number'} value={bDay} onInput={changeDay} name={'day'}></input>
-      {errorDay && <p>{errorDay}</p>}
-
-      Month
-      <input type={'number'} value={bMonth} onInput={changeMonth} name={'month'}></input>
-      {errorMonth && <p>{errorMonth}</p>}
-
-      Year
-      <input type={'number'} value={bYear} onInput={changeYear} name={'year'}></input>
-      {errorYear && <p>{errorYear}</p>}
-
-
-      <button onClick={calculateAgeDiff}>Submit</button>
-      {diffYear && diffYear} years
-      {diffMonth && diffMonth} months
-      {diffDay && diffDay} days
-
-      <div className="attribution">
-        Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
-        Coded by <a href="https://github.com/Bomowo">Bomowo</a>.
+      <div className="denomination">
+        Day
+        Month
+        Year
       </div>
+
+      <div className="input-fields">
+        <input type={'number'} value={bDay} onInput={changeDay} name={'day'}></input>
+        <input type={'number'} value={bMonth} onInput={changeMonth} name={'month'}></input>
+        <input type={'number'} value={bYear} onInput={changeYear} name={'year'}></input>
+      </div>
+
+      <div className="error-msg">
+        {errorDay && <p>{errorDay}</p>}
+        {errorMonth && <p>{errorMonth}</p>}
+        {errorYear && <p>{errorYear}</p>}
+      </div>
+
+      <div className="submit-form">
+        <hr></hr>
+        <button onClick={calculateAgeDiff}>Submit</button>
+      </div>
+
+      <div className="results">
+        {diffYear && diffYear} years
+        {diffMonth && diffMonth} months
+        {diffDay && diffDay} days
+      </div>
+
     </>
   )
 }
