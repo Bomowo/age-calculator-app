@@ -2,7 +2,7 @@ import { useState } from "react"
 
 function App() {
   let [[bDay, bMonth, bYear], setDate] = useState([1,1,1])
-  let [[diffDay, diffMonth, diffYear], setDiffDate] = useState([null, null, null])
+  let [[diffDay, diffMonth, diffYear], setDiffDate] = useState(['--', '--', '--'])
   let [[errorDay, errorMonth, errorYear, errorReq], setError] = useState([null, null, null, null])
 
   function changeDay (e) {
@@ -124,21 +124,21 @@ function App() {
   return (
     <>
       <div className="denomination">
-        Day
-        Month
-        Year
+        <p className={errorDay && 'error-day'}>Day</p>
+        <p className={errorDay && 'error-month'}>Month</p>
+        <p className={errorDay && 'error-year'}>Year</p> 
       </div>
 
       <div className="input-fields">
-        <input type={'number'} value={bDay} onInput={changeDay} name={'day'}></input>
-        <input type={'number'} value={bMonth} onInput={changeMonth} name={'month'}></input>
-        <input type={'number'} value={bYear} onInput={changeYear} name={'year'}></input>
+        <input type={'number'} value={bDay} onInput={changeDay} name={'day'} className={errorDay && 'error-day'}></input>
+        <input type={'number'} value={bMonth} onInput={changeMonth} name={'month'} className={errorMonth && 'error-month'}></input>
+        <input type={'number'} value={bYear} onInput={changeYear} name={'year'} className={errorYear && 'error-year'}></input>
       </div>
 
       <div className="error-msg">
-        {errorDay && <p>{errorDay}</p>}
-        {errorMonth && <p>{errorMonth}</p>}
-        {errorYear && <p>{errorYear}</p>}
+        {errorDay && <p className='error-day'>{errorDay}</p>}
+        {errorMonth && <p className='error-month'>{errorMonth}</p>}
+        {errorYear && <p className='error-year'>{errorYear}</p>}
       </div>
 
       <div className="submit-form">
@@ -147,9 +147,9 @@ function App() {
       </div>
 
       <div className="results">
-        {diffYear && diffYear} years
-        {diffMonth && diffMonth} months
-        {diffDay && diffDay} days
+        <p>{diffYear && diffYear} years</p>
+        <p>{diffMonth && diffMonth} months</p>
+        <p>{diffDay && diffDay} days</p>
       </div>
 
     </>
