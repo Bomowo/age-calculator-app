@@ -128,18 +128,21 @@ function App() {
         <p className={errorDay && 'error-month'}>Month</p>
         <p className={errorDay && 'error-year'}>Year</p> 
       </div>
+      
+      <div className="input">
+        <div className="input-fields">
+          <input type={'number'} value={bDay} onInput={changeDay} name={'day'} className={errorDay && 'error-day'}></input>
+          <input type={'number'} value={bMonth} onInput={changeMonth} name={'month'} className={errorMonth && 'error-month'}></input>
+          <input type={'number'} value={bYear} onInput={changeYear} name={'year'} className={errorYear && 'error-year'}></input>
+        </div>
 
-      <div className="input-fields">
-        <input type={'number'} value={bDay} onInput={changeDay} name={'day'} className={errorDay && 'error-day'}></input>
-        <input type={'number'} value={bMonth} onInput={changeMonth} name={'month'} className={errorMonth && 'error-month'}></input>
-        <input type={'number'} value={bYear} onInput={changeYear} name={'year'} className={errorYear && 'error-year'}></input>
+        <div className="error-msg">
+          <p className='error-day'>{errorDay}</p>
+          <p className='error-month'>{errorMonth}</p>
+          <p className='error-year'>{errorYear}</p>
+        </div>
       </div>
 
-      <div className="error-msg">
-        {errorDay && <p className='error-day'>{errorDay}</p>}
-        {errorMonth && <p className='error-month'>{errorMonth}</p>}
-        {errorYear && <p className='error-year'>{errorYear}</p>}
-      </div>
 
       <div className="submit-form">
         <hr></hr>
